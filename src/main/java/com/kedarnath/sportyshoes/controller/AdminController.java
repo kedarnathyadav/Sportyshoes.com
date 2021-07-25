@@ -6,6 +6,7 @@ import com.kedarnath.sportyshoes.model.Category;
 import com.kedarnath.sportyshoes.model.Product;
 import com.kedarnath.sportyshoes.service.CategoryService;
 import com.kedarnath.sportyshoes.service.ProductService;
+import com.kedarnath.sportyshoes.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,9 @@ public class AdminController {
     CategoryService categoryService;
     @Autowired
     ProductService productService;
+    @Autowired
+    UserService userService;
+
 
     @GetMapping("/admin")
     public String adminHome(){
@@ -66,11 +70,8 @@ public class AdminController {
     //product section
     @GetMapping("/admin/products")
     public String products( Model model,  String keyword){
-        System.out.println("Keyword="+" "+keyword);
-
         if(keyword!=null) {
             String newkeyword = "%"+keyword.toLowerCase()+"%";
-            System.out.println("Naya Keyword="+" "+newkeyword);
             model.addAttribute("products", productService.findByKeyword(newkeyword));
         }
         else {
@@ -133,7 +134,17 @@ public class AdminController {
 
     }
 
-
+    @GetMapping("/admin/users")
+    public String userslist( Model model,  String keyword){
+        if(keyword!=null) {
+            String newkeyword = "%"+keyword.toLowerCase()+"%";
+            model.addAttribute("users", userService.findByKeyword(newkeyword));
+        }
+        else {
+            model.addAttribute("users", userService.getAllUser());
+        }
+        return "users";
+    }
 }
 
 
