@@ -37,32 +37,30 @@
 </nav>
 <div class="container-fluid">
 
-    <a th:href="@{/admin/products/add}" style="margin: 20px 0" class="btn btn-primary">Add Product</a>
+
     <table class="table">
         <thead class="thead-light">
         <tr>
             <th scope="col">SN</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Category</th>
-            <th scope="col">Preview</th>
-            <th scope="col">Delete</th>
-            <th scope="col">Update</th>
+            <th scope="col">User First Name</th>
+            <th scope="col">User Last Name</th>
+            <th scope="col">User Email</th>
+            <th scope="col">Password</th>
+
         </tr>
-        <form th:action ="@{/admin/products}" method="get">
+        <form th:action ="@{/admin/users}" method="get">
             <input id ="txtSearch" type="text" name="keyword"/>
             <button type="submit">Go</button>
         </form>
         </thead>
         <tbody>
 
-        <tr th:each="product, iStat : ${products}">
+        <tr th:each="user, iStat : ${users}">
             <th scope="row" th:text="${iStat.index + 1}">1</th>
-            <td th:text="${product.name}">Larry</td>
-            <td th:text="${product.category.name}">Larry</td>
-            <td><img src="" height="100px" width="100px"  th:src="@{${'/productImages/' + product.imageName}}"></td>
-
-            <td><a href="" th:href="@{/admin/product/delete/{id}(id=${product.id})}" class="btn btn-danger">Delete</a></td>
-            <td><a href="" th:href="@{/admin/product/update/{id}(id=${product.id})}" class="btn btn-warning">Update</a></td>
+            <td th:text="${user.firstName}">Larry</td>
+            <td th:text="${user.lastName}">Larry</td>
+            <td th:text="${user.email}">Larry</td>
+            <td th:text="${user.password}">Larry</td>
 
         </tr>
         </tbody>
