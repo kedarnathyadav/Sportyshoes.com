@@ -1,6 +1,11 @@
 pipeline {
     agent any 
     stages {
+	 stage('compile and clean') { 
+            steps {
+		sh "mvn clean compile"
+            }
+        }
         stage('Deploy') { 
             steps {
                 sh "mvn clean install"
@@ -8,7 +13,7 @@ pipeline {
 	}
 		stage('Execution') { 
             steps {
-                sh "java -jar target/SportyShoes-0.0.1-SNAPSHOT.jar"
+                sh "java -jar target/SportyShoes.com-0.0.1-SNAPSHOT.jar"
             }
 	}
 
